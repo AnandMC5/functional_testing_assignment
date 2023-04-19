@@ -1,0 +1,174 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    table {
+      border: 5px solid #333;
+      border-collapse: collapse;
+    }
+    td {
+      font-size: 20px;
+      border: 3px solid #333;
+      padding: 10px;
+    }
+
+    /* Add styles for the bank balance */
+    #balance {
+      color: #fff;
+      font-size: 20px;
+      margin-top: 15px;
+      margin-right: 30px;
+      float: right;
+    }
+
+    /* Add styles for the bank icons */
+    .bank-icon {
+      font-size: 32px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    /* Add styles for the bank icon container */
+    #bank-icons {
+      margin: 50px;
+      padding: 50px;
+      justify-content: center;
+      text-align: center;
+      display: flex;
+      gap: 70px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./home.html">RupeeTrust</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="./home.html">Home</a></li>
+      </ul>
+      <!-- Add the balance element to the navbar -->
+      <p id="balance" class="navbar-text navbar-right">Balance: ₹</p>
+    </div>
+  </nav>
+  <div class="container">
+    <h2>Welcome <span id="name"></span>!</h2>
+    <p>Here are your account details:</p>
+    <table class="table table-bordered table-sm">
+      <tbody>
+        <tr>
+          <td><strong>Account number:</strong></td>
+          <td><span id="account-number"></span></td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td><span id="email"></span></td>
+        </tr>
+        <tr>
+          <td><strong>Phone:</strong></td>
+          <td><span id="phone"></span></td>
+        </tr>
+        <tr>
+          <td><strong>Address:</strong></td>
+          <td><span id="address"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="bank-icons">
+      <a href="./withdraw.html" id="withdraw-btn"><i class="fa fa-inr bank-icon" id="withdraw-icon">Withdraw</i></a>
+      <a href="./deposit.html" id="deposit-btn"><i class="glyphicon glyphicon-plus bank-icon" id="deposit-icon">deposit</i></a>
+      <a href="./transfer.html" id="transfer-btn"><i class="glyphicon glyphicon-transfer bank-icon" id="transfer-icon">transfer</i></a>
+    </div>
+    
+    
+
+  <script>
+    $(document).ready(function() {
+  var account = JSON.parse(sessionStorage.getItem("account"));
+  $("#name").text(account.name);
+  $("#account-number").text(account.accountNumber);
+  $("#email").text(account.email);
+  $("#phone").text(account.phone);
+  $("#address").text(account.address);
+  var balance = account.balance.toLocaleString('en-IN', {style: 'currency', currency: 'INR'});
+  $("#balance").append(balance);
+
+  // Show forms on button click
+  $("#withdraw-btn").click(function() {
+    $("#withdraw-form").toggle();
+  });
+
+  $("#deposit-btn").click(function() {
+    $("#deposit-form").toggle();
+  });
+
+  $("#transfer-btn").click(function() {
+    $("#transfer-form").toggle();
+  });
+
+  // Update balance on form submit
+  $("#withdraw-form").submit(function(event) {
+    event.preventDefault();
+    var amount = parseInt($("#withdraw-amount").val());
+    if (amount <= account.balance) {
+      account.balance -= amount;
+      sessionStorage.setItem("account", JSON.stringify(account));
+      var balance = account.balance.toLocaleString('en-IN', {style: 'currency', currency: 'INR'});
+      $("#balance").text("Balance: " + balance);
+      $("#withdraw-amount").val("");
+      $("#withdraw-success").show();
+      $("#withdraw-error").hide();
+    } else {
+      $("#withdraw-success").hide();
+      $("#withdraw-error").show();
+    }
+  });
+
+  $("#deposit-form").submit(function(event) {
+    event.preventDefault();
+    var amount = parseInt($("#deposit-amount").val());
+    account.balance += amount;
+    sessionStorage.setItem("account", JSON.stringify(account));
+    var balance = account.balance.toLocaleString('en-IN', {style: 'currency', currency: 'INR'});
+    $("#balance").text("Balance: " + balance);
+    $("#deposit-amount").val("");
+    $("#deposit-success").show();
+  });
+
+  $("#transfer-form").submit(function(event) {
+    event.preventDefault();
+    var amount = parseInt($("#transfer-amount").val());
+    var recipientAccount = JSON.parse(sessionStorage.getItem("recipientAccount"));
+    if (amount <= account.balance) {
+      account.balance -= amount;
+      recipientAccount.balance += amount;
+      sessionStorage.setItem("account", JSON.stringify(account));
+      sessionStorage.setItem("recipientAccount", JSON.stringify(recipientAccount));
+      var balance = account.balance.toLocaleString('en-IN', {style: 'currency', currency: 'INR'});
+      $("#balance").text("Balance: " + balance);
+      $("#transfer-amount").val("");
+      $("#transfer-recipient").val("");
+      $("#transfer-success").show();
+      $("#transfer-error").hide();
+    } else {
+      $("#transfer-success").hide();
+      $("#transfer-error").show();
+    }
+  });
+}); 
+
+
+
+ </script>
+ </body>
+</html>
+ 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Details</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 1px solid black;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  
+  </style>
+  
+</head>
+<body>
+  <div class="container">
+    <h2>User Details</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Serial No.</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="user-list">
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // Check if local storage is available
+    if (typeof(Storage) !== "undefined") {
+      // Get the user list from local storage
+      var userList = JSON.parse(localStorage.getItem("userList")) || [];
+      // Get the table body element
+      var tableBody = document.getElementById("user-list");
+      // Initialize the serial number counter
+      var serialNo = 1;
+      // Iterate through the user list and add each user to the table
+      for (var i = 0; i < userList.length; i++) {
+        var user = userList[i];
+        var row = tableBody.insertRow(-1);
+        var serialNoCell = row.insertCell(0);
+        var nameCell = row.insertCell(1);
+        var emailCell = row.insertCell(2);
+        var passwordCell = row.insertCell(3);
+        var deleteCell = row.insertCell(4);
+        serialNoCell.innerHTML = serialNo++;
+        nameCell.innerHTML = user.name;
+        emailCell.innerHTML = user.email;
+        passwordCell.innerHTML = user.password;
+        deleteCell.innerHTML = '<button class="btn btn-danger btn-xs" onclick="deleteUser(' + i + ')">Delete</button>';
+      }
+    } else {
+      // Local storage is not available
+      alert("Local storage is not available.");
+    }
+
+    function deleteUser(index) {a
+      // Get the user list from local storage
+      var userList = JSON.parse(localStorage.getItem("userList")) || [];
+      // Remove the user at the specified index
+      userList.splice(index, 1);
+      // Save the updated user list back to local storage
+      localStorage.setItem("userList", JSON.stringify(userList));
+      // Refresh the page
+      location.reload();
+    }
+  </script>
+</body>
+</html>

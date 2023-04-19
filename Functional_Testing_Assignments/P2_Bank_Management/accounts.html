@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Accounts List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">RupeeTrust</a>
+    </div>
+    <ul class="nav navbar-nav"> 
+      <li><a href="./home.html">Home</a></li>
+      <li class="active"><a href="./account.html">Accounts</a></li>
+      <li><a href="./update.html">Update details</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <h2>List of Bank Accounts</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Account Number</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="accounts-list">
+    </tbody>
+  </table>
+</div>
+<script>
+  // Retrieve all account data from localStorage
+  var accounts = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (/^\d{10}$/.test(key)) {
+      var formData = JSON.parse(localStorage.getItem(key));
+      accounts.push({
+        accountNumber: key,
+        name: formData.find(x => x.name === "name").value,
+        email: formData.find(x => x.name === "email").value,
+        phone: formData.find(x => x.name === "phone").value,
+        address: formData.find(x => x.name === "address").value
+      });
+    }
+  }
+
+  // Generate HTML elements to display account data
+  var accountsList = $("#accounts-list");
+  accounts.forEach(function(account) {
+    var tr = $("<tr>");
+    $("<td>").text(account.accountNumber).appendTo(tr);
+    $("<td>").text(account.name).appendTo(tr);
+    $("<td>").text(account.email).appendTo(tr);
+    $("<td>").text(account.phone).appendTo(tr);
+    $("<td>").text(account.address).appendTo(tr);
+    $("<td>").html("<button class='btn btn-danger' onclick='deleteAccount(\"" + account.accountNumber + "\")'>Delete</button>").appendTo(tr);
+    tr.appendTo(accountsList);
+  });
+
+  // Function to delete account data from localStorage
+  function deleteAccount(accountNumber) {
+    if (confirm("Are you sure you want to delete this account?")) {
+      localStorage.removeItem(accountNumber);
+      location.reload();
+    }
+  }
+</script>
+</body>
+</html>

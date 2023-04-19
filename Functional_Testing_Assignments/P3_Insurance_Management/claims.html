@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Claims - Insurance Company</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Style for claims table */
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+css
+Copy code
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./index.html">AleenTrust Insurance</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="./policies.html">Policies</a></li>
+                <li class="active"><a href="./claims.html">Claims</a></li>
+                <li><a href="./payments.html">Payments</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>My Claims</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Medical Claim</h3>
+                <img src="./images/health_2.png" alt="Auto Insurance">
+                <p>Health insurance is a type of insurance that helps cover medical expenses. It can cover a wide range of services including doctor visits, hospitalizations, prescription medications, and more. With health insurance, you can have access to the care you need without worrying about the high cost of medical bills. It can also provide preventative care to help you stay healthy.</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#auto-claim-modal">File a Claim</button>
+            </div>
+            <div class="col-md-4">
+                <h3>Home Damage Claim</h3>
+                <img src="./images/home.jpg" alt="Home Insurance">
+                <p>Health insurance is a type of insurance that helps cover medical expenses. It can cover a wide range of services including doctor visits, hospitalizations, prescription medications, and more. With health insurance, you can have access to the care you need without worrying about the high cost of medical bills. It can also provide preventative care to help you stay healthy.</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#home-claim-modal">File a Claim</button>
+            </div>
+            <div class="col-md-4">
+                <h3>Life Insurance Claim</h3>
+                <img src="./images/life_1.png" alt="Life Insurance">
+                <p>Life insurance provides financial security for your loved ones after your passing. It pays out a lump sum of money to your beneficiaries upon your death. This money can be used to pay off debts, cover living expenses, or fund future expenses such as college tuition. Life insurance can give you peace of mind knowing that your family will be taken care of if something happens to you.</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#life-claim-modal">File a Claim</button>
+             </div>
+             <div class="row">
+                <div class="col-md-12">
+                    <h2>File a Claim</h2>
+                    <hr>
+                    <form action="submit-claim.php" method="post">
+                        <div class="form-group">
+                            <label for="claim-type">Claim Type:</label>
+                            <select class="form-control" id="claim-type" name="claim-type">
+                                <option value="auto-accident">Medical</option>
+                                <option value="home-damage">Home Damage</option>
+                                <option value="life-insurance">Life Insurance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="claim-details">Claim Details:</label>
+                            <textarea class="form-control" rows="5" id="claim-details" name="claim-details"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="claim-date">Claim Date:</label>
+                            <input type="date" class="form-control" id="claim-date" name="claim-date">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>   

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    .form-group {
+      margin-top: 20px;
+    }
+    .btn {
+      margin-top: 20px;
+    }
+    .input-group-addon {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" placeholder="Enter password">
+          <span class="input-group-addon" id="togglePassword"><i class="glyphicon glyphicon-eye-open"></i></span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="login()">Submit</button>
+    </form>
+  </div>
+  <script>
+    function login() {
+      // Get the user list from local storage
+      var userList = JSON.parse(localStorage.getItem("userList")) || [];
+      // Get the email and password inputs
+      var emailInput = document.getElementById("email");
+      var passwordInput = document.getElementById("password");
+      // Iterate through the user list and check if the email and password match any user
+      for (var i = 0; i < userList.length; i++) {
+        var user = userList[i];
+        if (emailInput.value == user.email && passwordInput.value == user.password) {
+          // Email and password match a user, redirect to dashboard.html
+          window.location.href = "userdash.html";
+          return;
+        }
+      }
+      // Email and password do not match any user, show error message
+      alert("Invalid email or password.");
+    }
+    // Toggle password visibility
+    $(document).ready(function(){
+      $("#togglePassword").click(function(){
+        var passwordInput = document.getElementById("password");
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          $("#togglePassword").html("<i class='glyphicon glyphicon-eye-close'></i>");
+        } else {
+          passwordInput.type = "password";
+          $("#togglePassword").html("<i class='glyphicon glyphicon-eye-open'></i>");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

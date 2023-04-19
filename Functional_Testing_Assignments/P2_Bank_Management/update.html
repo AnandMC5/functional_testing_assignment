@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Update Account Details</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">RupeeTrust</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="./home.html">Home</a></li>
+      <li><a href="./account.html">Accounts</a></li>
+      <li class="active"><a href="./update.html">Update details</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <h2>Update Account Details</h2>
+  <form id="update-form">
+    <div class="form-group">
+      <label for="account-number">Account Number:</label>
+      <input type="text" class="form-control" id="account-number" name="account-number" required>
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="tel" class="form-control" id="phone" name="phone" required>
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <textarea class="form-control" id="address" name="address" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Account</button>
+  </form>
+</div>
+<script>
+  // Retrieve existing account data from localStorage and pre-fill the form fields
+  var accountNumber = localStorage.getItem("currentAccountNumber");
+  var formData = JSON.parse(localStorage.getItem(accountNumber));
+  $("#account-number").val(accountNumber);
+  $("#name").val(formData.find(x => x.name === "name").value);
+  $("#email").val(formData.find(x => x.name === "email").value);
+  $("#phone").val(formData.find(x => x.name === "phone").value);
+  $("#address").val(formData.find(x => x.name === "address").value);
+// Update account data in localStorage and redirect to the accounts list page
+$("#update-form").submit(function(event) {
+event.preventDefault();
+var formData = $(this).serializeArray();
+var updatedData = {};
+formData.forEach(function(field) {
+updatedData[field.name] = field.value;
+});
+localStorage.setItem(accountNumber, JSON.stringify(updatedData));
+alert("Account details updated successfully!");
+window.location.href = "./account.html";
+});
+</script>
+
+</body>
+</html>

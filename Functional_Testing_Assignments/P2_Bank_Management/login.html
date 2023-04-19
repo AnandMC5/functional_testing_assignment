@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Login</h2>
+  <form id="login-form">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
+<script>
+  $(document).ready(function() {
+    $("#login-form").submit(function(event) {
+      event.preventDefault();
+      var email = $("#email").val();
+      var account = null;
+      
+      // Find the account with matching email
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (/^\d{10}$/.test(key)) {
+          var formData = JSON.parse(localStorage.getItem(key));
+          var emailField = formData.find(x => x.name === "email");
+          if (emailField && emailField.value === email) {
+            account = {
+              accountNumber: key,
+              name: formData.find(x => x.name === "name").value,
+              email: email,
+              phone: formData.find(x => x.name === "phone").value,
+              address: formData.find(x => x.name === "address").value
+            };
+            break;
+          }
+        }
+      }
+
+      // If matching account found, redirect to dashboard with account data
+      if (account) {
+        sessionStorage.setItem("account", JSON.stringify(account));
+        window.location.href = "./dashboard.html";
+      } else {
+        alert("Invalid email. Please try again.");
+      }
+    });
+  });
+</script>
+</body>
+</html>

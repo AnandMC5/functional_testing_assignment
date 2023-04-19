@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create Bank Account</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">RupeeTrust</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="./home.html">Home</a></li>
+      <li><a href="./create.html">Create a account</a></li>
+      <li><a href="./update.html">Update details</a></li>
+    </ul>
+    
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Create a Bank Account</h2>
+  <form id="bank-account-form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="tel" class="form-control" id="phone" name="phone">
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <textarea class="form-control" id="address" name="address"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Account</button>
+  </form>
+</div>
+
+<script>
+  // Generate a random 10-digit account number
+  function generateAccountNumber() {
+    var accountNumber = "";
+    for (var i = 0; i < 10; i++) {
+      accountNumber += Math.floor(Math.random() * 10);
+    }
+    return accountNumber;
+  }
+
+  // Handle form submission
+  $('#bank-account-form').submit(function(event) {
+    event.preventDefault();
+
+    // Generate account number
+    var accountNumber = generateAccountNumber();
+
+    // Save form data to localStorage
+    var formData = $(this).serializeArray();
+    localStorage.setItem(accountNumber, JSON.stringify(formData));
+
+    // Redirect to details page
+    window.location.href = "details.html?accountNumber=" + accountNumber;
+  });
+</script>
+
+</body>
+</html>

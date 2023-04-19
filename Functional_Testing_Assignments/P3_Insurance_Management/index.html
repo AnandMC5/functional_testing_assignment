@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Insurance Company</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    /* Make the image full screen and dim */
+    body {
+      background: url("https://images.unsplash.com/photo-1637763723578-79a4ca9225f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGluc3VyYW5jZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60") no-repeat center center fixed;
+      
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      opacity: 3;
+    }
+
+    .navbar-nav>li>a,
+    .dropdown-menu {
+      font-size: 20px;
+    }
+
+    /* Move the login and signup buttons to the right side of the navbar */
+    .navbar-right {
+      margin-right: 0;
+    }
+
+    /* Style the login and signup buttons */
+    .btn-login,
+    .btn-signup {
+      margin-left: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+      padding: 8px 15px;
+      margin-top: 5px;
+    }
+
+    #login,
+    #signup {
+      padding: 4px;
+      margin: 4px;
+    }
+
+    .content {
+      padding: 80px;
+      margin: 80px;
+
+      color: black;
+      text-shadow: 2px 2px 5px white;
+    }
+
+    @font-face {
+  font-family: 'MyUniqueFont';
+  src: url('path/to/font.woff2') format('woff2'),
+       url('path/to/font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h2 {
+  font-size: 60px;
+  font-family: Arial, sans-serif;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./index.html">AleenTrust Insurance</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="./index.html">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Services <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+            <li><a href="./homeinsurance.html">Home Insurance</a></li>
+            <li><a href="./lifeinsurance.html">Life Insurance</a></li>
+            <li><a href="./healthinsurance.html">Health Insurance</a></li>
+          </ul>
+         
+        </li>
+       
+        <li><a href="./admin.html">Admin</a></li> <!-- Add admin option to navbar -->
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><button type="button" class="btn btn-default btn-login" id="login">Log In</button></li>
+        <li><button type="button" class="btn btn-primary btn-signup" id="signup">Sign Up</button></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content">
+    <h2>Welcome to AleenTrust, your trusted partner in protecting your life, health, and assets. With years of
+      experience in the insurance industry, we are committed to providing our clients with the best coverage, at the
+      most affordable rates.
+
+  </div>
+
+  <script>
+    // Get the signup button element
+    var signupBtn = document.getElementById("signup");
+
+    // Add a click event listener to the button
+    signupBtn.addEventListener("click", function () {
+      // Redirect to the signup.html page
+      window.location.href = "signup.html";
+    });
+    // Get the signup button element
+    var loginBtn = document.getElementById("login");
+
+    // Add a click event listener to the button
+    loginBtn.addEventListener("click", function () {
+      // Redirect to the login.html page
+      window.location.href = "login.html";
+    });
+  </script>
+
+</body>
+
+</html>

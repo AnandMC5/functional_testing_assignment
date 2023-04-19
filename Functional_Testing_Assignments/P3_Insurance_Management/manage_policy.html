@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Policy Management - Insurance Company</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+ <style>
+    p{
+        font-size: 20px;
+    }
+    .row{
+        padding: 4px;
+        margin: 4px 4px;
+    }
+ </style>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./index.html">AleenTrust Insurance</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./policies.html">Policies</a></li>
+                <li><a href="./claims.html">Claims</a></li>
+                <li><a href="./payments.html">Payments</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Policy Management</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Purchase Policy</h3>
+                <form action="purchasepolicy.html">
+                    <div class="form-group">
+                        <label for="policy_type">Policy Type:</label>
+                        <select class="form-control" id="policy_type" name="policy_type">
+                            <option value="home_insurance">Home Insurance Policy</option>
+                            <option value="life_insurance">Life Insurance Policy</option>
+                            <option value="health_insurance">Health Insurance Policy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="policy_length">Policy Length (in years):</label>
+                        <input type="number" class="form-control" id="policy_length" name="policy_length" min="1" max="30">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="purchase()">Purchase Policy</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h3>My Policies</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Policy Type</th>
+                            <th>Policy Length</th>
+                            <th>Expiration Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Home Insurance Policy</td>
+                            <td>3</td>
+                            <td>01/01/2026</td>
+                            <td><button type="button" class="btn btn-danger">Cancel</button></td>
+                       
+                        </tr>
+                        <tr>
+                            <td>Life Insurance Policy</td>
+                            <td>$200/month</td>
+                            <td>
+                                <form>
+                                    <label for="policy-term">Term (years): </label>
+                                    <select id="policy-term" name="policy-term">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </form>
+                            </td>
+                            <td><button type="button" class="btn btn-primary">Purchase</button></td>
+                        </tr>
+                        <tr>
+                            <td>Health Insurance Policy</td>
+                            <td>$300/month</td>
+                            <td>
+                                <form>
+                                    <label for="policy-term">Term (years): </label>
+                                    <select id="policy-term" name="policy-term">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </form>
+                            </td>
+                            <td><button type="button" class="btn btn-primary">Purchase</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    
+    </html>
+    

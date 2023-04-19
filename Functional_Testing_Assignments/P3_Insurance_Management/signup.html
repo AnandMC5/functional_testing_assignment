@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Signup</h2>
+    <form id="signup-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" class="form-control" id="email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Get the signup form element
+    var signupForm = document.getElementById("signup-form");
+
+    // Add a submit event listener to the form
+    signupForm.addEventListener("submit", function (event) {
+      // Prevent the default form submission behavior
+      event.preventDefault();
+
+      // Get the form data
+      var formData = new FormData(signupForm);
+
+      // Create an object to store the user information
+      var user = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        password: formData.get("password")
+      };
+
+      // Check if local storage is available
+      if (typeof(Storage) !== "undefined") {
+        // Get the existing user list from local storage
+        var userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+        // Add the new user to the list
+        userList.push(user);
+
+        // Save the updated user list back to local storage
+        localStorage.setItem("userList", JSON.stringify(userList));
+
+        // Redirect to the details.html page
+        
+        window.location.href = "signupdone.html";
+      } else {
+        // Local storage is not available
+        alert("Local storage is not available.");
+      }
+    });
+  </script>
+</body>
+</html>

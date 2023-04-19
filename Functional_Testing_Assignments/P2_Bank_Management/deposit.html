@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Deposit Money</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    table {
+      border: 5px solid #333;
+      border-collapse: collapse;
+    }
+    td {
+      font-size: 20px;
+      border: 3px solid #333;
+      padding: 10px;
+    }
+
+    /* Add styles for the bank balance */
+    #balance {
+      color: #fff;
+      font-size: 20px;
+      margin-top: 15px;
+      margin-right: 30px;
+      float: right;
+    }
+
+    /* Add styles for the bank icons */
+    .bank-icon {
+      font-size: 32px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    /* Add styles for the bank icon container */
+    #bank-icons {
+      margin: 50px;
+      padding: 50px;
+      justify-content: center;
+      text-align: center;
+      display: flex;
+      gap: 70px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./home.html">RupeeTrust</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="./home.html">Home</a></li>
+      </ul>
+      <!-- Add the balance element to the navbar -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="balance" href="./dashboard.html">Balance: ₹0</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Deposit Money</h1>
+    <form id="deposit-form">
+      <div class="form-group">
+        <label for="amount">Amount (in Rupees):</label>
+        <input type="number" class="form-control" id="amount" placeholder="Enter amount" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Deposit</button>
+    </form>
+  </div>
+  <script>
+    let balance = 0;
+    const balanceElement = document.getElementById('balance');
+  
+    // Listen for form submit event
+    document.getElementById('deposit-form').addEventListener('submit', (event) => {
+      event.preventDefault(); // prevent default form submit behavior
+  
+      const amount = parseInt(document.getElementById('amount').value);
+      if (isNaN(amount) || amount <= 0) {
+        alert('Invalid amount');
+        return;
+      }
+  
+      balance += amount;
+      balanceElement.textContent = `Balance: ₹${balance}`;
+      alert(`₹${amount} deposited successfully. Current balance: ₹${balance}`);
+  
+      // Redirect to dashboard.html
+      window.location.href = "./dashboard.html";
+    });
+
+    
+  $(document).ready(function() {
+    var balance = $("#balance").text();
+    var amount = $("#amount").val();
+    var newBalance = parseInt(balance) + parseInt(amount);
+    sessionStorage.setItem("balance", " ₹" + newBalance.toLocaleString('en-IN'));
+  });
+
+  </script>
+</body>
+</html>  
